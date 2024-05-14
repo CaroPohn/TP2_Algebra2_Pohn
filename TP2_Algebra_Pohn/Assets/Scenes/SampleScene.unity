@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 416758499}
   - component: {fileID: 416758498}
   - component: {fileID: 416758497}
+  - component: {fileID: 416758501}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -567,9 +568,37 @@ Transform:
   m_LocalPosition: {x: -20, y: 0.699, z: 10}
   m_LocalScale: {x: 0.50457, y: 1.3517, z: 0.47412}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &416758501
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416758496}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1001 &639464811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1034,12 +1063,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 39.63771, y: 0.22268255, z: -42.183414}
+  m_LocalScale: {x: 1.9818854, y: 0.73980916, z: 2.1091707}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 416758500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1292411148
 PrefabInstance:
@@ -1387,7 +1416,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
+  - {fileID: 416758500}
   - {fileID: 705507995}
   - {fileID: 1840838910}
   - {fileID: 158787575}
@@ -1406,4 +1435,3 @@ SceneRoots:
   - {fileID: 1646884544}
   - {fileID: 343938166}
   - {fileID: 664403641}
-  - {fileID: 416758500}
