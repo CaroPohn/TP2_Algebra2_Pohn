@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (1)
+      value: Room8
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,7 +190,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom
+      value: Room5
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -247,7 +247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (4)
+      value: Room16
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -304,7 +304,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: dc05bdc0d69ad904f81e9e6f707973f1, type: 3}
       propertyPath: m_Name
-      value: ThreeDoorRoom
+      value: Room4
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: dc05bdc0d69ad904f81e9e6f707973f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -361,7 +361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 2f142f02757220d4ea51be675aee6121, type: 3}
       propertyPath: m_Name
-      value: FourDoorRoom
+      value: Room13
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 2f142f02757220d4ea51be675aee6121, type: 3}
       propertyPath: m_LocalPosition.x
@@ -418,7 +418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (8)
+      value: Room10
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -477,7 +477,10 @@ GameObject:
   - component: {fileID: 416758499}
   - component: {fileID: 416758498}
   - component: {fileID: 416758497}
+  - component: {fileID: 416758503}
+  - component: {fileID: 416758502}
   - component: {fileID: 416758501}
+  - component: {fileID: 416758504}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -564,41 +567,78 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416758496}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -20, y: 0.699, z: 10}
   m_LocalScale: {x: 0.50457, y: 1.3517, z: 0.47412}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &416758501
-Rigidbody:
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &416758501
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416758496}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6de28ec2b7ec74d8a8ef19f306c12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 0.5
+--- !u!114 &416758502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416758496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6090a7746650248b52e50ed635e788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!143 &416758503
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416758496}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &416758504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416758496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5fb093c45e36f4c8b65c8567833b0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &639464811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -609,7 +649,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 2f142f02757220d4ea51be675aee6121, type: 3}
       propertyPath: m_Name
-      value: FourDoorRoom (1)
+      value: Room3
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 2f142f02757220d4ea51be675aee6121, type: 3}
       propertyPath: m_LocalPosition.x
@@ -666,7 +706,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_Name
-      value: OneDoorRoom
+      value: Room15
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,7 +857,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (3)
+      value: Room6
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -874,7 +914,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_Name
-      value: OneDoorRoom (1)
+      value: Room12
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -931,7 +971,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_Name
-      value: OneDoorRoom (3)
+      value: Room1
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1036,8 +1076,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 30
+  field of view: 29
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1064,7 +1104,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.63771, y: 0.22268255, z: -42.183414}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9818854, y: 0.73980916, z: 2.1091707}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1080,7 +1120,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (6)
+      value: Room14
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1137,7 +1177,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_Name
-      value: OneDoorRoom (2)
+      value: Room2
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 7dc101e68ed8eaf468515859a8f3e03a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,7 +1234,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (2)
+      value: Room9
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1251,7 +1291,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (7)
+      value: Room11
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1308,7 +1348,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_Name
-      value: TwoDoorRoom (5)
+      value: Room17
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 67a26ad0b1ff7a44f9db6d1b8684dc0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1365,7 +1405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397071393581783074, guid: 2f142f02757220d4ea51be675aee6121, type: 3}
       propertyPath: m_Name
-      value: FourDoorRoom (2)
+      value: Room7
       objectReference: {fileID: 0}
     - target: {fileID: 6653232527763275230, guid: 2f142f02757220d4ea51be675aee6121, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1418,20 +1458,20 @@ SceneRoots:
   m_Roots:
   - {fileID: 416758500}
   - {fileID: 705507995}
-  - {fileID: 1840838910}
+  - {fileID: 834367825}
+  - {fileID: 1505705449}
+  - {fileID: 639464811}
+  - {fileID: 290372739}
   - {fileID: 158787575}
+  - {fileID: 773169508}
+  - {fileID: 1840838910}
   - {fileID: 44563662}
   - {fileID: 1555375596}
-  - {fileID: 290372739}
-  - {fileID: 307437868}
+  - {fileID: 343938166}
+  - {fileID: 1646884544}
   - {fileID: 809356842}
-  - {fileID: 639464811}
-  - {fileID: 773169508}
+  - {fileID: 307437868}
+  - {fileID: 1292411148}
+  - {fileID: 664403641}
   - {fileID: 241538356}
   - {fileID: 1681801499}
-  - {fileID: 1292411148}
-  - {fileID: 1505705449}
-  - {fileID: 834367825}
-  - {fileID: 1646884544}
-  - {fileID: 343938166}
-  - {fileID: 664403641}
