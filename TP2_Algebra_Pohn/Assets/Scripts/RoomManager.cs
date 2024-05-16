@@ -9,6 +9,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Camera cam;
     private List<Room> rooms;
     [SerializeField] private int segmentsAmount = 1;
+    private int playerRoomIndex = 0;
 
     Vector3[] nearPlanePoints = new Vector3[1];
     Vector3[] farPlanePoints = new Vector3[1];
@@ -36,11 +37,12 @@ public class RoomManager : MonoBehaviour
 
     private void ShowPlayerRoom()
     {
-        foreach(Room room in rooms)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            if(IsPlayerInRoom(room))
-            { 
-                room.gameObject.SetActive(true);
+            if (IsPlayerInRoom(rooms[i]))
+            {
+                rooms[i].gameObject.SetActive(true);
+                playerRoomIndex = i;
                 return;
             }
         }
@@ -53,7 +55,9 @@ public class RoomManager : MonoBehaviour
 
     private void ShowRoomsInPlayerSight()
     {
-        
+        Room playerRoom = rooms[playerRoomIndex];
+
+
     }
 
     private void SetFrustumPoints()
