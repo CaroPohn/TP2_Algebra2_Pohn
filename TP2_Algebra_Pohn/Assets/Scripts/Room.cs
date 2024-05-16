@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    private List<Wall> walls = new List<Wall>();
+    public List<Wall> walls = new List<Wall>();
+    private GameObject debug;
 
     private void Awake()
     {
         AddRoomWalls();
+        debug = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     }
 
     private void AddRoomWalls()
@@ -15,6 +17,7 @@ public class Room : MonoBehaviour
         foreach (Wall wall in transform.GetComponentsInChildren<Wall>())
         {
             walls.Add(wall);
+            wall.owner = this;
         }
     }
 
@@ -31,7 +34,7 @@ public class Room : MonoBehaviour
         return true;
     }
 
-    public bool IsVectorIntersectingWall(Vector3 origin, Vector3 end)
+    public Wall IsVectorIntersectingWall(Vector3 origin, Vector3 end)
     {
         foreach (Wall wall in walls)
         {
@@ -39,13 +42,14 @@ public class Room : MonoBehaviour
             {
                 if(wall.hasDoor)
                 {
-                    return wall.IsPointInsideDoor(collisionPoint);
+                    if(wall.IsPointInsideDoor(collisionPoint))
+                    {
+                        return wall;
+                    }
                 } 
-                else
-                    return true;
             }
         }
-        return false;
+        return null;
     }
 
     public bool PlaneRaycast(Vector3 origin, Vector3 direction, Plane plane, out Vector3 collisionPoint) //https://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm
@@ -62,6 +66,7 @@ public class Room : MonoBehaviour
         float enter = product2 / product1;
 
         collisionPoint = origin + (direction * enter);
+        debug.transform.position = collisionPoint;
 
         return enter > 0f;
     }

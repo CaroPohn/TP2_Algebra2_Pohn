@@ -4,9 +4,8 @@ public class Wall : MonoBehaviour
 {
     public Plane wallPlane;
     public bool hasDoor;
-
-    public int doorWidth = 2;
-    public int doorHeight = 3;
+    public Room owner;
+    public Wall conection;
 
     //[SerializeField] private Bounds doorBoundingBox;
 
@@ -44,10 +43,17 @@ public class Wall : MonoBehaviour
         Gizmos.DrawLine(bottomLeft, topLeft);
     }
 
-    public bool IsPointInsideDoor(Vector3 point)
+    public bool IsPointInsideDoor(Vector3 point) //
     {
-        //return doorBoundingBox.Contains(point);
-        return true;
+        Vector2 init = new Vector2(transform.position.x - transform.lossyScale.x, transform.position.y - transform.lossyScale.y);
+        Vector2 end = new Vector2(transform.position.x + transform.lossyScale.x, transform.position.y + transform.lossyScale.y);
+
+        bool isInside =  point.x > init.x && point.y > init.y && point.x < end.x && point.y < end.y;
+
+        if (isInside)
+            Debug.Log(transform.name + " " + owner.name);
+
+        return isInside;
     }
 
     void OnDrawGizmos()

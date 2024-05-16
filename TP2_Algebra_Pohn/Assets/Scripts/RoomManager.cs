@@ -24,7 +24,7 @@ public class RoomManager : MonoBehaviour
         HideAllRooms();
         ShowPlayerRoom();
         ShowRoomsInPlayerSight();
-        SetFrustumPoints();
+        SetFrustumPoints();    
     }
 
     private void HideAllRooms()
@@ -53,16 +53,24 @@ public class RoomManager : MonoBehaviour
         return room.IsPointInRoom(playerCamera.position);
     }
 
-    private void ShowRoomsInPlayerSight()
+    private void ShowRoomsInPlayerSight(Room room = null)
     {
-        Room playerRoom = rooms[playerRoomIndex];
+        Room roomToCheck = room == null ? rooms[playerRoomIndex] : room;
 
         for (int i = 0; i < nearPlanePoints.Length; i++)
         {
-            if (!playerRoom.IsVectorIntersectingWall(nearPlanePoints[i], farPlanePoints[i]))
-            {
+            Wall wall = roomToCheck.IsVectorIntersectingWall(nearPlanePoints[i], farPlanePoints[i]);
 
-                
+            if (wall != null)
+            {
+                bool isEnabled = wall.owner.gameObject.activeSelf;
+                wall.owner.gameObject.SetActive(true);
+
+                if(!isEnabled || roomToCheck == rooms[playerRoomIndex])
+                {
+                    if(wall.conection != null)
+                        ShowRoomsInPlayerSight(wall.conection.owner);
+                }
             }
         }
     }
