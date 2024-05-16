@@ -7,6 +7,7 @@ public class Wall : MonoBehaviour
 
     public float doorWidth = 2;
     public float doorHeight = 3;
+    public float doorDepth = 0.2f;
 
     private Vector3 doorInit;
     private Vector3 doorEnd;
@@ -23,8 +24,12 @@ public class Wall : MonoBehaviour
 
     private void Start()
     {
-        doorInit = transform.position + transform.right * (doorWidth / 2) - transform.up * (doorHeight / 2);
-        doorEnd = transform.position - transform.right * (doorWidth / 2) + transform.up * (doorHeight / 2);
+        Vector3 right = transform.right * (doorWidth / 2);
+        Vector3 up = transform.up * (doorHeight / 2);
+        Vector3 forward = transform.forward * (doorDepth / 2);
+
+        doorInit = transform.position - right - up - forward;
+        doorEnd = transform.position + right + up + forward;
     }
 
     private void CreateWallPlane()
@@ -54,14 +59,13 @@ public class Wall : MonoBehaviour
         Gizmos.DrawLine(bottomLeft, topLeft);
     }
 
-    public bool IsPointInsideDoor(Vector3 point) //
+    public bool IsPointInsideDoor(Vector3 point) 
     {
-        bool isInside =  point.x > doorInit.x && point.y > doorInit.y && point.x < doorEnd.x && point.y < doorEnd.y;
+        bool isInsideDoorInX = point.x > doorInit.x && point.x < doorEnd.x;
+        bool isInsideDoorInY = point.y > doorInit.y && point.y < doorEnd.y;
+        bool isInsideDoorInZ = point.z > doorInit.z && point.z < doorEnd.z;
 
-        if (isInside)
-            Debug.Log(transform.name + " " + owner.name);
-
-        return isInside;
+        return (isInsideDoorInX && isInsideDoorInY /*&& isInsideDoorInZ*/);
     }
 
     void OnDrawGizmos()

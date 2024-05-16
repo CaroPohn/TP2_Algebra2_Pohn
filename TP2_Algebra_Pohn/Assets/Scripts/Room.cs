@@ -35,25 +35,44 @@ public class Room : MonoBehaviour
         return true;
     }
 
-    public Wall IsVectorIntersectingWall(Vector3 origin, Vector3 end)
+    public bool IsVectorIntersectingWall(Vector3 origin, Vector3 end)
     {
         foreach (Wall wall in walls)
         {
-            if(PlaneRaycast(origin, (end - origin).normalized, wall.wallPlane, out Vector3 collisionPoint))
+            Vector3 direction = (end - origin).normalized;
+
+            if(wall.wallPlane.Raycast(new Ray(origin, direction), out float enter))/*PlaneRaycast(origin, (end - origin).normalized, wall.wallPlane, out Vector3 collisionPoint)*/
             {
+                Vector3 collisionPoint = origin + direction * enter;
+
+                Debug.DrawLine(origin, collisionPoint, Color.yellow);
                 if(wall.hasDoor)
                 {
                     if(wall.IsPointInsideDoor(collisionPoint))
                     {
-                        return wall;
+                        return false;
                     }
                 } 
+                return true;
             }
         }
+        return false;
+    }
+
+    public Wall GetIntersectingWall(Vector3 pointOne, Vector3 pointTwo)
+    {
+        foreach (Wall wall in walls)
+        {
+            if(!wall.wallPlane.SameSide(pointOne, pointTwo))
+            {
+                return wall;
+            }
+        }
+
         return null;
     }
 
-    public bool PlaneRaycast(Vector3 origin, Vector3 direction, Plane plane, out Vector3 collisionPoint) //https://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm
+    private bool PlaneRaycast(Vector3 origin, Vector3 direction, Plane plane, out Vector3 collisionPoint) //https://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm
     {
         float product1 = Vector3.Dot(direction, plane.normal);
         float product2 = 0f - Vector3.Dot(origin, plane.normal) - plane.distance;

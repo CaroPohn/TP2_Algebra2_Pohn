@@ -88,8 +88,18 @@ public class RoomManager : MonoBehaviour
         {
             if (!roomsToDraw.Contains(room) && room.IsPointInRoom(middlePoint))
             {
+                //Wall intersectedWall = room.GetIntersectingWall(initPoint, middlePoint);
+
+                //if (intersectedWall != null && intersectedWall.IsPointInsideDoor(middlePoint))
+                //{
+                //}
+
                 middlePointInNewRoom = true;
                 roomsToDraw.Add(room);
+                
+                //if (!room.IsVectorIntersectingWall(initPoint, middlePoint))
+                //{
+                //}
             }
         }
 
