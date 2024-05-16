@@ -4,16 +4,27 @@ public class Wall : MonoBehaviour
 {
     public Plane wallPlane;
     public bool hasDoor;
+
+    public float doorWidth = 2;
+    public float doorHeight = 3;
+
+    private Vector3 doorInit;
+    private Vector3 doorEnd;
+
     public Room owner;
     public Wall conection;
-
-    //[SerializeField] private Bounds doorBoundingBox;
 
     public float planeSize = 5f;
 
     private void Awake()
     {
         CreateWallPlane();
+    }
+
+    private void Start()
+    {
+        doorInit = transform.position + transform.right * (doorWidth / 2) - transform.up * (doorHeight / 2);
+        doorEnd = transform.position - transform.right * (doorWidth / 2) + transform.up * (doorHeight / 2);
     }
 
     private void CreateWallPlane()
@@ -45,10 +56,7 @@ public class Wall : MonoBehaviour
 
     public bool IsPointInsideDoor(Vector3 point) //
     {
-        Vector2 init = new Vector2(transform.position.x - transform.lossyScale.x, transform.position.y - transform.lossyScale.y);
-        Vector2 end = new Vector2(transform.position.x + transform.lossyScale.x, transform.position.y + transform.lossyScale.y);
-
-        bool isInside =  point.x > init.x && point.y > init.y && point.x < end.x && point.y < end.y;
+        bool isInside =  point.x > doorInit.x && point.y > doorInit.y && point.x < doorEnd.x && point.y < doorEnd.y;
 
         if (isInside)
             Debug.Log(transform.name + " " + owner.name);
@@ -59,7 +67,9 @@ public class Wall : MonoBehaviour
     void OnDrawGizmos()
     {
         DrawPlane(transform.forward, transform.position, planeSize);
-        //Gizmos.DrawCube(doorBoundingBox.center + transform.position, doorBoundingBox.size);
+
+        if(hasDoor)
+            Gizmos.DrawLine(doorInit, doorEnd);
     }
 }
 

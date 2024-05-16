@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 464836579723448778}
   - component: {fileID: 2161377254913972702}
   - component: {fileID: 943060207876043156}
-  - component: {fileID: 9058049955893239032}
   m_Layer: 0
   m_Name: DoorWall
   m_TagString: Untagged
@@ -141,6 +140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasDoor: 1
+  doorWidth: 2
+  doorHeight: 3
+  owner: {fileID: 0}
+  conection: {fileID: 0}
   planeSize: 5
 --- !u!23 &943060207876043156
 MeshRenderer:
@@ -184,20 +187,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9058049955893239032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5113530913549503625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5cd7f907374ee4582eb3cca00b6264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 2
-  height: 3
 --- !u!1 &5934556378855242725
 GameObject:
   m_ObjectHideFlags: 0

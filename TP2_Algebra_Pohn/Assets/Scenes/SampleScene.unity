@@ -804,7 +804,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 416758500}
   cam: {fileID: 963194227}
-  segmentsAmount: 2
+  segmentsAmount: 10
+  nearPlanePoints:
+  - {x: 0, y: 0, z: 0}
+  farPlanePoints:
+  - {x: 0, y: 0, z: 0}
 --- !u!4 &435425748
 Transform:
   m_ObjectHideFlags: 0
@@ -1562,7 +1566,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 100
+  far clip plane: 20
   field of view: 54
   orthographic: 0
   orthographic size: 5

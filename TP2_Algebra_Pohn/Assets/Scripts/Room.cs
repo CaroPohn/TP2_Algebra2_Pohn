@@ -4,12 +4,10 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public List<Wall> walls = new List<Wall>();
-    private GameObject debug;
 
     private void Awake()
     {
         AddRoomWalls();
-        debug = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     }
 
     private void AddRoomWalls()
@@ -23,6 +21,9 @@ public class Room : MonoBehaviour
 
     public bool IsPointInRoom(Vector3 point)
     {
+        if(point.y > walls[0].transform.position.y + 1.5f || point.y < walls[0].transform.position.y - 1.5f)
+            return false;
+
         foreach(Wall wall in walls)
         {
             if(!wall.wallPlane.GetSide(point))
@@ -66,7 +67,6 @@ public class Room : MonoBehaviour
         float enter = product2 / product1;
 
         collisionPoint = origin + (direction * enter);
-        debug.transform.position = collisionPoint;
 
         return enter > 0f;
     }

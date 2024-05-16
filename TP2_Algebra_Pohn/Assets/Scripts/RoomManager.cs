@@ -11,8 +11,10 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int segmentsAmount = 1;
     private int playerRoomIndex = 0;
 
-    Vector3[] nearPlanePoints = new Vector3[1];
-    Vector3[] farPlanePoints = new Vector3[1];
+    [SerializeField] Vector3[] nearPlanePoints = new Vector3[1];
+    [SerializeField] Vector3[] farPlanePoints = new Vector3[1];
+
+    List<Vector3> BSPPoints = new List<Vector3>();
 
     private void Awake()
     {
@@ -53,25 +55,52 @@ public class RoomManager : MonoBehaviour
         return room.IsPointInRoom(playerCamera.position);
     }
 
-    private void ShowRoomsInPlayerSight(Room room = null)
+    private void ShowRoomsInPlayerSight()
     {
-        Room roomToCheck = room == null ? rooms[playerRoomIndex] : room;
+        BSPPoints.Clear();
+
+        List<Room> roomsToDraw = new List<Room>();
+        roomsToDraw.Add(rooms[playerRoomIndex]);
 
         for (int i = 0; i < nearPlanePoints.Length; i++)
         {
-            Wall wall = roomToCheck.IsVectorIntersectingWall(nearPlanePoints[i], farPlanePoints[i]);
+            RecursiveBSP(nearPlanePoints[i], farPlanePoints[i], roomsToDraw);
+        }
 
-            if (wall != null)
+        foreach (Room room in roomsToDraw)
+        {
+            room.gameObject.SetActive(true);
+        }
+    }
+
+    private void RecursiveBSP(Vector3 initPoint, Vector3 endPoint, List<Room> roomsToDraw)
+    {
+        Vector3 middlePoint = Vector3.Lerp(initPoint, endPoint, 0.5f);
+
+        if (Vector3.Distance(middlePoint, endPoint) < 0.25f)
+            return;
+
+        BSPPoints.Add(middlePoint);
+
+        bool middlePointInNewRoom = false;
+
+        foreach (Room room in rooms)
+        {
+            if (!roomsToDraw.Contains(room) && room.IsPointInRoom(middlePoint))
             {
-                bool isEnabled = wall.owner.gameObject.activeSelf;
-                wall.owner.gameObject.SetActive(true);
-
-                if(!isEnabled || roomToCheck == rooms[playerRoomIndex])
-                {
-                    if(wall.conection != null)
-                        ShowRoomsInPlayerSight(wall.conection.owner);
-                }
+                middlePointInNewRoom = true;
+                roomsToDraw.Add(room);
             }
+        }
+
+        if(middlePointInNewRoom)
+        {
+            RecursiveBSP(initPoint, middlePoint, roomsToDraw);
+            RecursiveBSP(middlePoint, endPoint, roomsToDraw);
+        }
+        else
+        {
+            RecursiveBSP(middlePoint, endPoint, roomsToDraw);                
         }
     }
 
@@ -83,24 +112,29 @@ public class RoomManager : MonoBehaviour
 
     private Vector3[] GetFrustumPlanePoints(float planeDistanceFromCamera)
     {
-        Vector3[] planePoints = new Vector3[segmentsAmount];
+        List<Vector3> planePoints = new List<Vector3>(segmentsAmount * segmentsAmount);
 
-        float planeWidth = 2 * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad) * planeDistanceFromCamera;
-        float stepSize = planeWidth / (segmentsAmount - 1);
+        float planeSize = 2 * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad) * planeDistanceFromCamera;
+        float stepSize = planeSize / (segmentsAmount - 1);
 
         for (int i = 0; i < segmentsAmount; i++)
         {
-            float x = -planeWidth * 0.5f + i * stepSize; //Resto el nearplanewidth dividido 2 para desplazarme desde el medio del nearplane hasta el inicio y luego le sumo el
-                                                             //stepsize multiplicado por el numero de segmento para que se vaya desplazando simetricamente a lo largo del eje x.
+            for (int j = 0; j < segmentsAmount; j++)
+            {
+                float x = -planeSize * 0.5f + i * stepSize; //Resto el nearplanewidth dividido 2 para desplazarme desde el medio del nearplane hasta el inicio y luego le sumo el
+                                                            //stepsize multiplicado por el numero de segmento para que se vaya desplazando simetricamente a lo largo del eje x.
 
-            Vector3 offset = cam.transform.position + cam.transform.right * x; //El x que setee antes tengo que usarlo basandome en el transform de mi camara y ahi tomando su vector
-                                                                               //right para que se posicionen en las coordenadas locales de la camara y no siguiendo el vector right 
-                                                                               //del mundo.
+                float y = -planeSize * 0.5f + j * stepSize;
 
-            planePoints[i] = planeDistanceFromCamera * cam.transform.forward + offset;
+                Vector3 offset = cam.transform.position + cam.transform.right * x + cam.transform.up * y; //El x que setee antes tengo que usarlo basandome en el transform de mi camara y ahi tomando su vector
+                                                                                                          //right para que se posicionen en las coordenadas locales de la camara y no siguiendo el vector right 
+                                                                                                          //del mundo.
+
+                planePoints.Add(planeDistanceFromCamera * cam.transform.forward + offset);
+            }
         }
 
-        return planePoints;
+        return planePoints.ToArray();
     }
 
     private void OnDrawGizmos()
@@ -121,11 +155,15 @@ public class RoomManager : MonoBehaviour
         {
             Gizmos.DrawLine(nearPlanePoints[i], farPlanePoints[i]);
         }
+
+        Gizmos.color = Color.red;
+        foreach (Vector3 point in BSPPoints) 
+        {
+            Gizmos.DrawSphere(point, .3f);
+        }
     }
 
     //private Vector3 PointInSegmentMiddle()
 
     //private bool IsSegmentCollitioningPlayerWall()
-
-
 }
