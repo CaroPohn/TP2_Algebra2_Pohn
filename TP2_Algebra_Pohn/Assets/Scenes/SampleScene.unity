@@ -710,6 +710,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 416758500}
+  cam: {fileID: 963194227}
+  segmentsAmount: 8
 --- !u!4 &435425748
 Transform:
   m_ObjectHideFlags: 0
