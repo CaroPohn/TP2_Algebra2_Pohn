@@ -31,9 +31,21 @@ public class Room : MonoBehaviour
         return true;
     }
 
-    public bool IsVectorIntersectingWall(Vector3 vector)
+    public bool IsVectorIntersectingWall(Vector3 origin, Vector3 end)
     {
-        return true;
+        foreach (Wall wall in walls)
+        {
+            if(PlaneRaycast(origin, (end - origin).normalized, wall.wallPlane, out Vector3 collisionPoint))
+            {
+                if(wall.hasDoor)
+                {
+                    return wall.IsPointInsideDoor(collisionPoint);
+                } 
+                else
+                    return true;
+            }
+        }
+        return false;
     }
 
     public bool PlaneRaycast(Vector3 origin, Vector3 direction, Plane plane, out Vector3 collisionPoint) //https://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm

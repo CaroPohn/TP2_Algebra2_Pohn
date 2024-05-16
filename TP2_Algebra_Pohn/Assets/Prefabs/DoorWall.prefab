@@ -139,6 +139,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasDoor: 1
+  doorWidth: 2
+  doorHeight: 3
+  doorBoundingBox:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.08, y: 1.51, z: 0.96}
+  planeSize: 5
 --- !u!1 &9043676387738178843
 GameObject:
   m_ObjectHideFlags: 0

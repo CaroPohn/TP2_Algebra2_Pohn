@@ -57,7 +57,14 @@ public class RoomManager : MonoBehaviour
     {
         Room playerRoom = rooms[playerRoomIndex];
 
+        for (int i = 0; i < nearPlanePoints.Length; i++)
+        {
+            if (!playerRoom.IsVectorIntersectingWall(nearPlanePoints[i], farPlanePoints[i]))
+            {
 
+                
+            }
+        }
     }
 
     private void SetFrustumPoints()

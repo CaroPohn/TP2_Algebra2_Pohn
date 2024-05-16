@@ -8,6 +8,8 @@ public class Wall : MonoBehaviour
     public int doorWidth = 2;
     public int doorHeight = 3;
 
+    //[SerializeField] private Bounds doorBoundingBox;
+
     public float planeSize = 5f;
 
     private void Awake()
@@ -42,9 +44,16 @@ public class Wall : MonoBehaviour
         Gizmos.DrawLine(bottomLeft, topLeft);
     }
 
+    public bool IsPointInsideDoor(Vector3 point)
+    {
+        //return doorBoundingBox.Contains(point);
+        return true;
+    }
+
     void OnDrawGizmos()
     {
         DrawPlane(transform.forward, transform.position, planeSize);
+        //Gizmos.DrawCube(doorBoundingBox.center + transform.position, doorBoundingBox.size);
     }
 }
 
